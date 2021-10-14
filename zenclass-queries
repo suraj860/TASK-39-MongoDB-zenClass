@@ -1,0 +1,214 @@
+//creating topics
+use zen_class;
+db.topics.insertMany([
+    {
+        "topic_id": "1",
+        "topic_name": "HTML",
+        "month": "january"
+    },
+    {
+        "topic_id": "2",
+        "topic_name": "CSS",
+        "month": "February"
+    },
+    {
+        "topic_id": "3",
+        "topic_name": "JavaScript",
+        "month": "October"
+    },
+    {
+        "topic_id": "4",
+        "topic_name": "React",
+        "month": "October"
+    },
+    {
+        "topic_id": "5",
+        "topic_name": "Mongodb",
+        "month": "October"
+    },
+    {
+        "topic_id": "6",
+        "topic_name": "Node.js",
+        "month": "November"
+    }])
+
+//mentor data
+db.mentors.insertMany([
+    {
+        "Mentor_Name" : "Nikhil",
+        "Email_id" :"nikhil345@gmail.com",
+        "Students_assign": 20
+    },
+     {
+        "Mentor_Name" : "Shekhar",
+        "Email_id" :"shekhar56@gmail.com",
+        "Students_assign": 10
+    },
+     {
+        "Mentor_Name" : "Vishwajeet",
+        "Email_id" :"vishwa23@gmail.com",
+        "Students_assign": 15
+    },
+     {
+        "Mentor_Name" : "Rohit",
+        "Email_id" :"rohit432@gmail.com",
+        "Students_assign": 12
+    },
+     {
+        "Mentor_Name" : "Pranav",
+        "Email_id" :"panya098@gmail.com",
+        "Students_assign": 18
+    },
+     {
+        "Mentor_Name" : "Shubham",
+        "Email_id" :"shubham76@gmail.com",
+        "Students_assign": 10
+    }])
+
+
+//company drives
+db.company_drive.insertMany([
+    {
+        "company_id": 1,
+        "company_name": "TCS",
+        "date": new Date("10/15/2021").toLocaleString()
+    },
+    {
+        "company_id": 2,
+        "company_name": "WIPRO",
+        "date": new Date("1/10/2021").toLocaleString()
+    },
+    {
+        "company_id": 3,
+        "company_name": "INFOSYS",
+        "date": new Date("10/19/2021").toLocaleString()
+    },
+    {
+        "company_id": 4,
+        "company_name": "FLIPCART",
+        "date": new Date("10/25/2021").toLocaleString()
+    },
+    {
+        "company_id": 5,
+        "company_name": "AMAZON",
+        "date": new Date("10/20/2021").toLocaleString()
+    },
+    {
+        "company_id": 6,
+        "company_name": "ERON",
+        "date": new Date("10/10/2021").toLocaleString()
+    }
+])
+
+//attendance
+
+db.attendance.insertMany([
+    {
+        "student_id": 1,
+        "company-1": 1,
+        "company-2": 2,
+        "attendance": "present"
+    },
+    {
+        "student_id": 2,
+        "company-1": 3,
+        "company-2": 4,
+        "attendance": "present"
+    },
+    {
+        "student_id": 3,
+        "company-1": 3,
+        "company-2": 6,
+        "attendance": "absent"
+    },
+    {
+        "student_id": 4,
+        "company-1": 4,
+        "company-2": 5,
+        "attendance": "present"
+    },
+    {
+        "student_id": 5,
+        "company-1": 1,
+        "company-2": 6,
+        "attendance": "absent"
+    },
+    {
+        "student_id": 6,
+        "company-1": 1,
+        "company-2": 2,
+        "attendance": "present"
+    },
+])
+
+
+1..db.topics.aggregate([
+    {$match:{month:"October"}},
+    {
+            $lookup: {
+                from: "tasks",
+                localField: "topic_id",
+                foreignField: "id",
+                as: "tasks"
+            }
+    }
+    ]);
+
+2 . Find the number of problems solved by the user in codekata
+
+db.codekata.aggregate([
+    {
+        $lookup: {
+            from: "users",
+            localField: "user_id",
+            foreignField: "studentd_id",
+            as: "student_info"
+        }
+    }
+])
+
+3. Find all the mentors with who has the mentee's count more than 15
+
+db.mentors.find({Students_assign :{$gte : 15}});
+
+4 . Find all the company drives which appeared between 15 oct-2020 and 31-oct-2020
+
+db.company_drive.find({ date: { $gt: "10/15/2021", $lt: "10/30/2021" } });
+
+
+5 - Find all the company drives and students who are appeared for the placement.
+
+
+db.attendance.aggregate([
+    { $match: { "attendance": "present" } },
+    {
+        $lookup: {
+            from: "users",
+            localField: "student_id",
+            foreignField: "studentd_id",
+            as: "student_id"
+        }
+    },
+    {
+        $lookup: {
+            from: "company_drive",
+            localField: "company-1",
+            foreignField: "company_id",
+            as: "company-1"
+        }
+    },
+    {
+        $lookup: {
+            from: "company_drive",
+            localField: "company-2",
+            foreignField: "company_id",
+            as: "company-2"
+        }
+    }
+])
+
+
+
+
+
+

@@ -1,3 +1,48 @@
+//users data
+
+db.users.insertMany([
+   {
+	"_id" : ObjectId("6157daf6c465282c1c7490f4"),
+	"studentd_id" : 1,
+	"name" : "Deepak",
+	"email" : "deepak458@fgmail.com"
+},
+{
+	"_id" : ObjectId("6157daf6c465282c1c7490f5"),
+	"studentd_id" : 2,
+	"name" : "Rakesh",
+	"email" : "rakesh546@fgmail.com"
+},
+{
+	"_id" : ObjectId("6157daf6c465282c1c7490f6"),
+	"studentd_id" : 3,
+	"name" : "Prasad",
+	"email" : "prasad546@fgmail.com"
+},
+{
+	"_id" : ObjectId("6157daf6c465282c1c7490f7"),
+	"studentd_id" : 4,
+	"name" : "Sanket",
+	"email" : "sanket55@fgmail.com"
+},
+
+{
+	"_id" : ObjectId("6157daf6c465282c1c7490f8"),
+	"studentd_id" : 5,
+	"name" : "Umesh",
+	"email" : "umesh888@fgmail.com"
+},
+
+{
+	"_id" : ObjectId("6157daf6c465282c1c7490f9"),
+	"studentd_id" : 6,
+	"name" : "Vijay",
+	"email" : "vijay878@fgmail.com"
+}
+])
+
+
+
 //creating topics
 use zen_class;
 db.topics.insertMany([
@@ -31,6 +76,88 @@ db.topics.insertMany([
         "topic_name": "Node.js",
         "month": "November"
     }])
+
+//codekata
+
+db.codekata.insertMany([
+   {
+	"_id" : ObjectId("6157dc0fc465282c1c7490fa"),
+	"user_id" : 1,
+	"solved_problems" : 98,
+	"total" : 100
+},
+{
+	"_id" : ObjectId("6157dc0fc465282c1c7490fb"),
+	"user_id" : 2,
+	"solved_problems" : 82,
+	"total" : 100
+},
+{
+	"_id" : ObjectId("6157dc0fc465282c1c7490fc"),
+	"user_id" : 3,
+	"solved_problems" : 95,
+	"total" : 100
+},
+{
+	"_id" : ObjectId("6157dc0fc465282c1c7490fd"),
+	"user_id" : 4,
+	"solved_problems" : 85,
+	"total" : 100
+},
+{
+	"_id" : ObjectId("6157dc0fc465282c1c7490fe"),
+	"user_id" : 5,
+	"solved_problems" : 84,
+	"total" : 100
+},
+{
+	"_id" : ObjectId("6157dc0fc465282c1c7490ff"),
+	"user_id" : 6,
+	"solved_problems" : 86,
+	"total" : 100
+}
+])
+
+//tasks
+
+db.tasks.insertMany([
+   {
+	"_id" : ObjectId("61570986be44cc2bb00fdd74"),
+	"id" : "1",
+	"task_name" : "Task-1-HTML",
+	"month" : "january"
+},
+{
+	"_id" : ObjectId("61570986be44cc2bb00fdd75"),
+	"id" : "2",
+	"task_name" : "Task-2-CSS",
+	"month" : "February"
+},
+{
+	"_id" : ObjectId("61570986be44cc2bb00fdd76"),
+	"id" : "3",
+	"task_name" : "Task-3-JavaScript",
+	"month" : "October"
+},
+{
+	"_id" : ObjectId("61570986be44cc2bb00fdd77"),
+	"id" : "4",
+	"task_name" : "Task-4-React",
+	"month" : "October"
+},
+{
+	"_id" : ObjectId("61570986be44cc2bb00fdd78"),
+	"id" : "5",
+	"task_name" : "Task-5-Mongodb",
+	"month" : "October"
+},
+{
+	"_id" : ObjectId("61570986be44cc2bb00fdd79"),
+	"id" : "6",
+	"task_name" : "Task-6-Node.js",
+	"month" : "November"
+} 
+    ])
 
 //mentor data
 db.mentors.insertMany([
@@ -154,7 +281,7 @@ db.attendance.insertMany([
     }
     ]);
 
-2 . Find the number of problems solved by the user in codekata
+2. Find the number of problems solved by the user in codekata
 
 db.codekata.aggregate([
     {
@@ -174,7 +301,6 @@ db.mentors.find({Students_assign :{$gte : 15}});
 4 . Find all the company drives which appeared between 15 oct-2020 and 31-oct-2020
 
 db.company_drive.find({ date: { $gt: "10/15/2021", $lt: "10/30/2021" } });
-
 
 5 - Find all the company drives and students who are appeared for the placement.
 
